@@ -140,18 +140,3 @@ def counter(year1, year2,):
 
 
 counter(year1, year2)
-
-
-
-print('da')
-
-
-
-
-
-
-
-
-
-
-
