@@ -136,3 +136,67 @@ for i in range(1, k + 1):
 
 #################################################################################################
 #Задача 6
+
+first_numbers = [0] * 3
+second_numbers = [0] * 7
+
+for i in range(3):
+   first_numbers[i] = int(input('Введите ' + str(i + 1) + '-е число для первого списка: '))
+for i in range(7):
+   second_numbers[i] = int(input('Введите ' + str(i + 1) + '-е число для второго списка: '))
+print('Первый список:', first_numbers)
+print('Второй список:', second_numbers)
+
+a = first_numbers + second_numbers
+a = list(set(a))
+print('Новый первый список с уникальными элементами:', a)
+
+#################################################################################################
+#Задача 7
+
+num_k = int(input('Кол-во коньков: '))
+counter = 0
+
+size_in_stock = []
+need_product = []
+
+for u in range(num_k):
+    size_in_stock.append(int(input(f'Размер {u + 1} пары:')))
+
+num_people = int(input('\nКол-во людей: '))
+for y in range(num_people):
+    need_product.append(int(input(f'Размер ноги {y + 1} человека:')))
+
+for i in need_product:
+    for j in range(len(size_in_stock)):
+        if size_in_stock[j] >= i:
+            del size_in_stock[j]
+            counter += 1
+            break
+
+
+print(f'\nНаибольшее кол-во людей, которые могут взять ролики: {counter}')
+
+#################################################################################################
+#Задача 8
+
+num = int(input('Кол-во человек: '))
+number = int(input('Какое число в считалке? '))
+
+print('Значит, выбывает каждый', number, 'человек.')
+
+mens_list = list(range(1, num + 1))
+out = 0
+for _ in range(num - 1):
+   print('\nТекущий круг людей', mens_list)
+   start_count = out % len(mens_list)
+   out = (start_count + number - 1) % len(mens_list)
+   print('Начало счёта с номера', mens_list[start_count])
+   print('Выбывает человек под номером', mens_list[out])
+   mens_list.remove(mens_list[out])
+   print()
+
+print('Остался человек под номером', mens_list)
+
+#################################################################################################
+#Задача 9
