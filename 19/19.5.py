@@ -148,4 +148,154 @@ print(json.dumps(data['tokens'][1]["sec_token_info"], indent=4))            # В
 #################################################################################################
 #Задача 4
 
+goods = {
+    'Лампа': '12345',
+    'Стол': '23456',
+    'Диван': '34567',
+    'Стул': '45678',
+}
 
+store = {
+    '12345': [
+        {'quantity': 27, 'price': 42},
+    ],
+    '23456': [
+        {'quantity': 22, 'price': 510},
+        {'quantity': 32, 'price': 520},
+    ],
+    '34567': [
+        {'quantity': 2, 'price': 1200},
+        {'quantity': 1, 'price': 1150},
+    ],
+    '45678': [
+        {'quantity': 50, 'price': 100},
+        {'quantity': 12, 'price': 95},
+        {'quantity': 43, 'price': 97},
+    ],
+}
+for product_name, product_code in goods.items():
+    it_quantity = 0
+    it_cost = 0
+    it_total_quantity = 0
+    it_total_cost = 0
+    for product in store[product_code]:
+        it_quantity = 0
+        it_cost = 0
+        it_quantity += product['quantity']
+        it_cost += product['price']
+        it_total_cost += it_quantity * it_cost
+        it_total_quantity += it_quantity
+    print(f'{product_name} - {it_total_quantity} шт, общая стоимость {it_total_cost} рублей')
+
+#################################################################################################
+#Задача 5
+
+
+#################################################################################################
+#Задача 6
+
+inser = int(input('Введите количество пар слов:'))
+word_dict = dict()
+for i in  range(1, inser + 1):
+    text = input(f'{i} пара: ').lower().split(' - ')
+    word_dict[text[0]] = text[1]
+    word_dict[text[1]] = text[0]
+
+while True:
+    word = input('Введите слово: ').lower()
+    if word in word_dict:
+        print('Синоним:', word_dict[word])
+    else:
+        print('Такого слова в словаре нет.')
+
+# Привет - Здравствуйте
+# Печально - Грустно
+# # Весело - Радостно
+
+#################################################################################################
+#Задача 7
+
+order = int(input('Введите количество заказов:'))
+order_dict = dict()
+for i in range(1, order + 1):
+    text = input(f'{i} order: ').lower().split()
+    if text[0] in order_dict:
+        if text[1] in order_dict[text[0]]:
+            order_dict[text[0]][text[1]] += int(text[2])
+        else:
+            order_dict[text[0]][text[1]] = text[2]
+    else:
+        order_dict[text[0]] = dict({text[1]: int(text[2])})
+
+for j_1 in sorted(order_dict):
+    print(f'\n{j_1}')
+    for j_2 in sorted(order_dict[j_1]):
+        print(f'\n{j_2}: {order_dict[j_1][j_2]}')
+
+#################################################################################################
+#Задача 8
+
+
+
+
+
+#################################################################################################
+#Задача 9
+
+def fam_def(name):
+    if name not in parents_tree:
+        heights[name] = 0
+        return 0
+    parent = parents_tree[name]
+    if parent in heights:
+        value = heights[parent] + 1
+    else:
+        value = fam_def(
+            parent) + 1
+    heights[name] = value
+    return value
+
+people = int(input('Введите количество человек:'))
+parents_tree = {}
+
+for i in range(1, people + 1):
+    line = input(f'{i} пара:')
+    child, parent = line.split()
+    parents_tree[child] = parent
+
+all_man = set(parents_tree.keys()) | set(parents_tree.values())
+
+heights = {}
+
+for name in all_man:
+    if name not in heights:
+        fam_def(name)
+
+print(f'«Высота» каждого члена семьи:\n')
+for name in sorted(heights):
+    print(f'{name}, {heights[name]}')
+
+
+#################################################################################################
+#Задача 10
+
+def can_make_pal(stri):
+    d = {}
+    for i in stri:
+        if d.get(i) is None:
+            d[i] = 1
+        else:
+            d[i] += 1
+    n = len(d)
+    e = 0
+    for j in d.values():
+        if j % 2 == 0:
+            e += 1
+    return e == n or e == n-1
+
+string = input('Введите строку:')
+
+if can_make_pal(string):
+    print('Можно сделать палиндромом')
+else:
+    print('Нельзя сделать палиндромом')
