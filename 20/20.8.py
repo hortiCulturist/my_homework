@@ -102,3 +102,93 @@ else:
 
 #################################################################################################
 #Задача 6
+
+num_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+result = list(zip(num_list[::2], num_list[1::2]))
+
+print(f"Новый список: { result } ")
+
+#################################################################################################
+#Задача 7
+
+def tpl_sort(num_list):
+    num_list = tuple(sorted(num_list))
+    return num_list
+
+numbers = (6, 3, -1, 8, 4, 10, -5)
+print(tpl_sort(numbers))
+
+#################################################################################################
+#Задача 8
+
+def add_contact(con):
+    name_sur = tuple(input('\nВведите имя и фамилию нового контакта (через пробел):').split(' '))
+    number = input('Введите номер телефона:')
+    if name_sur in con:
+        print('\nТакой человек уже есть в контактах.')
+    else:
+        con[name_sur] = number
+    print(f'Текущий словарь контактов: {con}\n')
+
+def find(con):
+    surname_find = input('\nВведите фамилию для поиска:')
+    for i in con:
+        if surname_find in i:
+            name = [j for j in i]
+            phone_number = con[i]
+            print(' '.join(name), phone_number)
+
+
+contact = dict()
+while True:
+    choise = int(input('Введите номер действия: \n1. Добавить контакт \n2. Найти человека \n'))
+    if choise == 1:
+        add_contact(contact)
+    elif choise == 2:
+        find(contact)
+    else:
+        print('Не корректный ввод! Повторите ввод\n')
+
+#################################################################################################
+#Задача 9
+
+def score_key(a):
+    return a[1][0] * 100000000 - a[1][1]
+
+score_table = {}
+number_rows = int(input('Общее количество строк протокола: '))
+print('Введите результат - имя участника (через пробел)')
+for time in range(number_rows):
+    ball, name = input('{0} запись:'.format(time + 1)).split()
+    ball = int(ball)
+    if name in score_table:
+        if ball > score_table[name][0]:
+            score_table[name][0] = ball
+            score_table[name][1] = time
+    else:
+        score_table[name] = [ball, time]
+scores = list(score_table.items())
+
+scores.sort(key=score_key, reverse=True)
+print('\nИтоги соревнований: ')
+for winner_index in 0, 1, 2:
+    print(f'{winner_index + 1} место {scores[winner_index][0]}', end=' ')
+    print(f'({scores[winner_index][1][0]})', sep='')
+
+#################################################################################################
+#Задача 10
+
+def ziper(symbol, number):
+    counter = 0
+    x = tuple()
+    y = list(symbol)
+    for i in number:
+        x = (y[counter], i)
+        counter += 1
+        print(x)
+
+str = input('Строка:')
+tup_num = tuple((10, 20, 30, 40))
+
+ziper(str, tup_num)
